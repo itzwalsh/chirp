@@ -1,6 +1,6 @@
 import { SignInButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
-import { RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
