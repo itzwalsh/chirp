@@ -4,5 +4,6 @@
 
 body {
     @apply bg-background text-text;
+
     overscroll-behavior: none;
 }

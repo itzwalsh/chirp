@@ -1,4 +1,4 @@
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { api } from "~/utils/api";
 import Image from "next/image";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
@@ -84,7 +84,7 @@ const Feed = () => {
 
   return (
     <div className="flex grow flex-col overflow-y-scroll">
-      {[...data, ...data, ...data, ...data].map((fullPost) => (
+      {data.map((fullPost) => (
         <PostView {...fullPost} key={fullPost.post.id} />
       ))}
     </div>

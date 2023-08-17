@@ -9,6 +9,7 @@ import { PageLayout } from "~/components/layout";
 import Image from "next/image";
 import { LoadingPage } from "~/components/loading";
 import { PostView } from "~/components/PostView";
+import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 
 const ProfileFeed = (props: { userId: string }) => {
   const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
@@ -64,11 +65,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
 export async function getStaticProps(
   context: GetStaticPropsContext<{ slug: string }>
 ) {
-  const helpers = createServerSideHelpers({
-    router: appRouter,
-    ctx: { prisma, userId: null },
-    transformer: superjson,
-  });
+  const helpers = generateSSGHelper();
 
   //this needs a non-null assertion (!) on params to tell TS that its not null/undefined
   const slug = context.params!.slug;
