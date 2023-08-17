@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 env:
-  DATABASE_URL: "https://fakedatabase.com"
+  DATABASE_URL: "https://fake.com"
 
 jobs:
   build:
@@ -13,14 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Linting
+      - name: Lint
         run: npm run lint
 
-      -name: Print Environment Variable
+      - name: Print Environment Variable
         run: echo $MY_ENV_VAR
