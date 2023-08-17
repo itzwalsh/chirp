@@ -1,16 +1,11 @@
 import { SignInButton, useUser } from "@clerk/nextjs";
-import Head from "next/head";
 import { type RouterOutputs, api } from "~/utils/api";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import Link from "next/link";
 import { PageLayout } from "~/components/layout";
-
-dayjs.extend(relativeTime);
+import { PostView } from "~/components/PostView";
 
 const CreatePostWizard = () => {
   const { user } = useUser();
@@ -75,45 +70,21 @@ const CreatePostWizard = () => {
   );
 };
 
-type PostWithUser = RouterOutputs["posts"]["getAll"][number];
-const PostView = (props: PostWithUser) => {
-  const { post, author } = props;
-  return (
-    <div key={post.id} className="flex gap-3 border-b border-accent p-4">
-      <Image
-        width={56}
-        height={56}
-        src={author.profilePicture}
-        alt="Author Profile Picture"
-        className="aspect-square w-14 rounded-full"
-      />
-      <div className="flex flex-col">
-        <div className="text-text">
-          <Link href={`/@${author.username}`}>
-            <span>{`@${author.username!}`}</span>
-          </Link>
-          <Link href={`/post/${post.id}`}>
-            <span className="font-thin">{` · ${dayjs(
-              post.createdAt
-            ).fromNow()}`}</span>
-          </Link>
-        </div>
-        <span className="text-2xl">{post.content}</span>
-      </div>
-    </div>
-  );
-};
-
 const Feed = () => {
   const { data, isLoading: postsLoading } = api.posts.getAll.useQuery();
 
-  if (postsLoading) return <LoadingPage />;
+  if (postsLoading)
+    return (
+      <div className="flex grow">
+        <LoadingPage />
+      </div>
+    );
 
   if (!data) return <div>Something went wrong</div>;
 
   return (
-    <div className="flex flex-col">
-      {data.map((fullPost) => (
+    <div className="flex grow flex-col overflow-y-scroll">
+      {[...data, ...data, ...data, ...data].map((fullPost) => (
         <PostView {...fullPost} key={fullPost.post.id} />
       ))}
     </div>
