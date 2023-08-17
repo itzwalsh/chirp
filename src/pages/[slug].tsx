@@ -38,13 +38,15 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   return (
     <>
       <Head>
-        <title>{data.username}</title>
+        <title>{data.username ?? data.externalUsername}</title>
       </Head>
       <PageLayout>
         <div className="relative h-36 bg-secondary">
           <Image
-            src={data.imageUrl}
-            alt={`${data.username ?? ""}'s profile picture`}
+            src={data.profilePicture}
+            alt={`${
+              data.username ?? data.externalUsername ?? "unknown"
+            }'s profile picture`}
             width={128}
             height={128}
             unoptimized={true}
@@ -52,9 +54,9 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
           />
         </div>
         <div className="h-[64px]"></div>
-        <div className="p-4 text-2xl font-semibold">
-          {`@${data.username ?? ""}`}
-        </div>
+        <div className="p-4 text-2xl font-bold">{`@${
+          data.username ?? data.externalUsername ?? "unknown"
+        }`}</div>
         <div className="w-full border-b border-primary"></div>
         <ProfileFeed userId={data.id} />
       </PageLayout>
