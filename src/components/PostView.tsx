@@ -1,4 +1,4 @@
-import { type RouterOutputs, api } from "~/utils/api";
+import { type RouterOutputs } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
@@ -22,7 +22,7 @@ export const PostView = (props: PostWithUser) => {
       <div className="flex flex-col">
         <div className="text-text">
           <Link href={`/@${author.username}`}>
-            <span>{`@${author.username!}`}</span>
+            <span>{`@${author.username}`}</span>
           </Link>
           <Link href={`/post/${post.id}`}>
             <span className="font-thin">{` · ${dayjs(

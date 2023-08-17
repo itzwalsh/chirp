@@ -1,5 +1,5 @@
 import { SignInButton, useUser } from "@clerk/nextjs";
-import { type RouterOutputs, api } from "~/utils/api";
+import { api } from "~/utils/api";
 import Image from "next/image";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { useState } from "react";

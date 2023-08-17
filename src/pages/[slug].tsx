@@ -70,7 +70,8 @@ export async function getStaticProps(
     transformer: superjson,
   });
 
-  const slug = context.params?.slug as string;
+  //this needs a non-null assertion (!) on params to tell TS that its not null/undefined
+  const slug = context.params!.slug;
 
   if (typeof slug !== "string") throw new Error("no slug");
 
